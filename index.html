@@ -1,0 +1,91 @@
+<!--Tarak Pandya; I am boorrowing this code from The radar chart site:http://bl.ocks.org/nbremer/21746a9668ffdf6d8242 and manipulating for Cairos Wheel visualization-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >  <!-- utf 8 bit char codes -->
+		<title>Visualization of Cairo's Wheel for Exoplanets</title>
+
+		<!-- Google fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> <!--borrow unique font from google apis -->
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+		<!--Calling D3.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		
+		<style>
+			body {
+				font-family: arial, 'Hiragino Sans GB',Tahoma, Arial, Helvetica, STHeiti;
+				font-size: 15px;
+				font-weight: 250;
+				fill: #242424;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+				cursor: default;
+			}
+			
+			.legend {
+				font-family: 'Raleway', sans-serif;
+				fill: #333333;
+			}
+			
+			.tooltip {
+				fill: #333333;
+			}
+		</style>
+	
+	</head>
+	<body>
+
+		<div class="radarChart"></div>
+
+		<script src="radarChart.js"></script>	
+		<script>
+			////////////////////////////////////////////////////////////// 
+			//////////////////////// Set-Up ////////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var margin = {top: 100, right: 100, bottom: 100, left: 100},
+				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+								
+			////////////////////////////////////////////////////////////// 
+			////////////////////////// Under the Data you can give any axis names ////////////////// 
+			//////////and any value (numbers from 0 to 100 in %) and it will draw the wheel/////////////// 
+
+			var data = [
+					  [//Kepler Exoplanets Cairos Wheel Scores
+						{axis:"Density",value:0.92},
+						{axis:"MultiDimensionality",value:0.92},
+						{axis:"Originality",value:0.96},
+						{axis:"Novelty",value:0.27},
+						{axis:"Figuration",value:0.51},
+						{axis:"Decoration",value:0.94},
+						{axis:"Lightness",value:0.48},
+						{axis:"Unidimensionality",value:0.19},
+						{axis:"Familiarity",value:0.24},
+						{axis:"Redundancy",value:0.90},
+						{axis:"Abstraction",value:1.0},
+						{axis:"Functionality",value:0.41}
+					  ]
+					];
+			////////////////////////////////////////////////////////////// 
+			//// Draw the Chart or Cairos Wheel ////////////////////////// 
+			////////////////////////////////////////////////////////////// 
+
+			var color = d3.scale.ordinal()
+				.range(["#3182bd"]);  //choose any color you like for circle
+				// round strokes makes it, round edges, if you set false--you will get sharp edges.
+			var radarChartOptions = {
+			  w: width,
+			  h: height,
+			  margin: margin,
+			  maxValue: 0.5,
+			  levels: 4,
+			  roundStrokes: false,
+			  color: color
+			};
+			//Call function to draw the Radar chart //this will draw radar chart but it appears as Cairos Wheel Visualization
+			RadarChart(".radarChart", data, radarChartOptions);
+		</script>
+	</body>
+</html>
